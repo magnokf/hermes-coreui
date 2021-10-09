@@ -5,32 +5,39 @@
         <CCardGroup>
           <CCard class="p-4">
             <CCardBody>
-              <CForm @submit.prevent="login" method="POST">
-                <h1>Entrar</h1>
-                <p class="text-muted">Usar seus Dados CBMERJ</p>
-                <CInput
-                  v-model="samaccountname"
-                  prependHtml="<i class='cui-user'></i>"
-                  placeholder="seu rg cbmerj"
-                  autocomplete="username rg"
-                >
-                  <template #prepend-content><CIcon name="cil-user"/></template>
-                </CInput>
-                <CInput
-                  v-model="password"
-                  prependHtml="<i class='cui-lock-locked'></i>"
-                  placeholder="Sua senha"
-                  type="password"
-                  autocomplete="curent-password"
-                >
-                  <template #prepend-content><CIcon name="cil-lock-locked"/></template>
-                </CInput>
-                <CRow>
-                  <CCol col="12">
-                    <CButton type="submit" color="primary" class="col px-4">Entrar</CButton>
-                  </CCol>
-                </CRow>
-              </CForm>
+              <ValidationObserver>
+                <CForm @submit.prevent="login" method="POST">
+                  <h1>Entrar</h1>
+                  <p class="text-muted">Usar seus Dados CBMERJ</p>
+                  <CInput
+                      v-on:keyup="validator"
+                      valid-feedback="Obrigado :)"
+                      invalid-feedback="Forneça pelo menos 4 caracteres."
+                      :is-valid="validator"
+                      v-model="samaccountname"
+                      prependHtml="<i class='cui-user'></i>"
+                      placeholder="seu rg cbmerj"
+                      autocomplete="username rg"
+                  >
+                    <template #prepend-content><CIcon name="cil-user"/></template>
+                  </CInput>
+                  <CInput
+                      v-model="password"
+                      prependHtml="<i class='cui-lock-locked'></i>"
+                      placeholder="Sua senha"
+                      type="password"
+                      autocomplete="curent-password"
+                  >
+                    <template #prepend-content><CIcon name="cil-lock-locked"/></template>
+                  </CInput>
+                  <CRow>
+                    <CCol col="12">
+                      <CButton type="submit" color="primary" class="col px-4">Entrar</CButton>
+                    </CCol>
+                  </CRow>
+                </CForm>
+              </ValidationObserver>
+
             </CCardBody>
           </CCard>
           <CCard
@@ -75,6 +82,9 @@ import axios from "axios";
         }
       },
       methods: {
+        validator(val){
+          return val ? val.length >= 4 : false
+        },
         goRegister(){
           this.$router.push({ path: 'register' });
         },
