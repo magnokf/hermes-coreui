@@ -90,10 +90,10 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function respondWithToken($token, $rg)
+    protected function respondWithToken($token, $samaccountname)
     {
 
-        $user = User::select('menuroles as roles')->where('rg', '=', $rg)->first();
+        $user = User::select('menuroles as roles')->where('samaccountname', '=', $samaccountname)->first();
 
 
         return response()->json([
