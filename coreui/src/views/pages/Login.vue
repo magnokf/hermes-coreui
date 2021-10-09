@@ -5,44 +5,35 @@
         <CCardGroup>
           <CCard class="p-4">
             <CCardBody>
-              <ValidationObserver>
-                <CForm @submit.prevent="login" method="POST">
-                  <h1>Entrar</h1>
-                  <p class="text-muted">Usar seus Dados CBMERJ</p>
-                  <ValidationProvider>
-                  <CInput
-                        v-on:keyup="validator"
-                        valid-feedback="Obrigado :)"
-                        invalid-feedback="Forneça pelo menos 4 caracteres."
-                        :is-valid="validator"
-                        v-model="samaccountname"
-                        prependHtml="<i class='cui-user'></i>"
-                        placeholder="seu rg cbmerj"
-                        autocomplete="username rg"
-                    >
-                      <template #prepend-content><CIcon name="cil-user"/></template>
-                    </CInput>
-                  </ValidationProvider>
-
-                  <CInput
-                      v-model="password"
-                      prependHtml="<i class='cui-lock-locked'></i>"
-                      placeholder="Sua senha"
-                      type="password"
-                      autocomplete="curent-password"
-                  >
-                    <template #prepend-content><CIcon name="cil-lock-locked"/></template>
-                  </CInput>
-                  <CRow>
-                    <CCol col="12">
-                      <CButton type="submit" color="primary" class="col px-4">Entrar</CButton>
-                    </CCol>
-                  </CRow>
-                </CForm>
-              </ValidationObserver>
-
-
-
+              <CForm @submit.prevent="login" method="POST">
+                <h1>Entrar</h1>
+                <p class="text-muted">Usar seus Dados CBMERJ</p>
+                <CInput
+                    valid-feedback="Obrigado :)"
+                    invalid-feedback="Forneça pelo menos 4 caracteres."
+                    :is-valid="validator"
+                    v-model="samaccountname"
+                    prependHtml="<i class='cui-user'></i>"
+                    placeholder="seu rg cbmerj"
+                    autocomplete="username rg"
+                >
+                  <template #prepend-content><CIcon name="cil-user"/></template>
+                </CInput>
+                <CInput
+                    v-model="password"
+                    prependHtml="<i class='cui-lock-locked'></i>"
+                    placeholder="Sua senha"
+                    type="password"
+                    autocomplete="curent-password"
+                >
+                  <template #prepend-content><CIcon name="cil-lock-locked"/></template>
+                </CInput>
+                <CRow>
+                  <CCol col="12">
+                    <CButton type="submit" color="primary" class="col px-4">Entrar</CButton>
+                  </CCol>
+                </CRow>
+              </CForm>
             </CCardBody>
           </CCard>
           <CCard
@@ -75,14 +66,9 @@
 <script>
 
 import axios from "axios";
-import {ValidationObserver, ValidationProvider} from "vee-validate";
 
     export default {
       name: 'Login',
-      components:{
-        ValidationObserver,
-        ValidationProvider,
-      },
       data() {
         return {
           samaccountname: '',

@@ -11,6 +11,6 @@
 |
 */
 
-//Route::get('/{any}', function () {
-//    return view('coreui.homepage');
-//})->where('any', '.*');
+//use Illuminate\Support\Facades\Route;
+//
+//Route::get('/', '');
