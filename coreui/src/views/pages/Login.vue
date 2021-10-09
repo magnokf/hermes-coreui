@@ -10,16 +10,20 @@
 
                 <h1>Entrar</h1>
                 <span class="text-danger" v-if="message">{{message}}</span>
+
                 <p class="text-muted">Usar seus Dados CBMERJ</p>
                 <CInput
-                    onkeyup="this.value=this.value.replace(/\D/g,'')"
+                    type="text"
+                    @keypress="onlyNumber"
                     valid-feedback="Obrigado :)"
                     invalid-feedback="Forneça pelo menos 4 caracteres."
                     :is-valid="validator"
                     v-model="samaccountname"
                     prependHtml="<i class='cui-user'></i>"
-                    placeholder="seu rg cbmerj"
+                    placeholder="seu rg CBMERJ"
                     autocomplete="username rg"
+                    maxlength="6"
+
                 >
                   <template #prepend-content><CIcon name="cil-user"/></template>
                 </CInput>
@@ -41,10 +45,10 @@
             </CCardBody>
           </CCard>
           <CCard
-            color="primary"
-            text-color="white"
-            class="text-center py-5 d-md-down-none"
-            body-wrapper
+              color="primary"
+              text-color="white"
+              class="text-center py-5 d-md-down-none"
+              body-wrapper
           >
             <h2>HermesApp</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cumque deserunt enim fugiat illo in iure maiores nostrum odit, quae quam qui quisquam temporibus vel velit veritatis voluptas. Facilis, repudiandae?</p>
@@ -54,9 +58,9 @@
                 href="https://intranet.cbmerj.rj.gov.br/"
             >
               <CImg
-                src="https://www.cbmerj.rj.gov.br/images/imagens/logo_bolacha.png"
-                class="active mt-3"
-            >
+                  src="https://www.cbmerj.rj.gov.br/images/imagens/logo_bolacha.png"
+                  class="active mt-3"
+              >
 
               </CImg>
             </a>
@@ -67,27 +71,35 @@
   </CContainer>
 </template>
 
+
 <script>
 
 import axios from "axios";
-
     export default {
       name: 'Login',
+      components: {
+
+      },
       data() {
         return {
           samaccountname: '',
           password: '',
           showMessage: false,
           message: '',
+          status:''
 
         }
       },
       methods: {
+        onlyNumber($event){
+          let keyCode = ($event.keyCode ? $event.keyCode : $event.which);
+          if ((keyCode < 48 || keyCode > 57) ) {
+            $event.preventDefault();
+          }
+
+        },
         validator(val){
           return val ? val.length >= 4 : false
-        },
-        goRegister(){
-          this.$router.push({ path: 'register' });
         },
         login() {
           let self = this;
@@ -104,7 +116,7 @@ import axios from "axios";
           .catch(function (error) {
             self.message = 'Acesso Proibido - Os dados informados não conferem.';
             self.showMessage = true;
-            console.log(error);
+
           });
   
         }
