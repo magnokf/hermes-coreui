@@ -1,2 +1,2 @@
 # hermes-coreui
-hermes-coreui
+Projeto Hermes (hermes-coreui)
