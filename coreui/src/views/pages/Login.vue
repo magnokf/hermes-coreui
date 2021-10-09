@@ -113,7 +113,7 @@ import axios from "axios";
             localStorage.setItem('roles', response.data.roles);
             self.$router.push({ path: 'dashboard' });
           })
-          .catch(function (error) {
+          .catch(function () {
             self.message = 'Acesso Proibido - Os dados informados não conferem.';
             self.showMessage = true;
 
