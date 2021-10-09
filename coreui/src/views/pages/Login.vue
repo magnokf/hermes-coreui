@@ -4,11 +4,15 @@
       <CCol>
         <CCardGroup>
           <CCard class="p-4">
+
             <CCardBody>
               <CForm @submit.prevent="login" method="POST">
+
                 <h1>Entrar</h1>
+                <span class="text-danger" v-if="message">{{message}}</span>
                 <p class="text-muted">Usar seus Dados CBMERJ</p>
                 <CInput
+                    onkeyup="this.value=this.value.replace(/\D/g,'')"
                     valid-feedback="Obrigado :)"
                     invalid-feedback="Forneça pelo menos 4 caracteres."
                     :is-valid="validator"
@@ -75,6 +79,7 @@ import axios from "axios";
           password: '',
           showMessage: false,
           message: '',
+
         }
       },
       methods: {
@@ -97,7 +102,7 @@ import axios from "axios";
             self.$router.push({ path: 'dashboard' });
           })
           .catch(function (error) {
-            self.message = 'Incorrect E-mail or password';
+            self.message = 'Acesso Proibido - Os dados informados não conferem.';
             self.showMessage = true;
             console.log(error);
           });
