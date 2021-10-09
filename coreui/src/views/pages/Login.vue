@@ -9,18 +9,21 @@
                 <CForm @submit.prevent="login" method="POST">
                   <h1>Entrar</h1>
                   <p class="text-muted">Usar seus Dados CBMERJ</p>
+                  <ValidationProvider>
                   <CInput
-                      v-on:keyup="validator"
-                      valid-feedback="Obrigado :)"
-                      invalid-feedback="Forneça pelo menos 4 caracteres."
-                      :is-valid="validator"
-                      v-model="samaccountname"
-                      prependHtml="<i class='cui-user'></i>"
-                      placeholder="seu rg cbmerj"
-                      autocomplete="username rg"
-                  >
-                    <template #prepend-content><CIcon name="cil-user"/></template>
-                  </CInput>
+                        v-on:keyup="validator"
+                        valid-feedback="Obrigado :)"
+                        invalid-feedback="Forneça pelo menos 4 caracteres."
+                        :is-valid="validator"
+                        v-model="samaccountname"
+                        prependHtml="<i class='cui-user'></i>"
+                        placeholder="seu rg cbmerj"
+                        autocomplete="username rg"
+                    >
+                      <template #prepend-content><CIcon name="cil-user"/></template>
+                    </CInput>
+                  </ValidationProvider>
+
                   <CInput
                       v-model="password"
                       prependHtml="<i class='cui-lock-locked'></i>"
@@ -37,6 +40,8 @@
                   </CRow>
                 </CForm>
               </ValidationObserver>
+
+
 
             </CCardBody>
           </CCard>
@@ -70,9 +75,14 @@
 <script>
 
 import axios from "axios";
+import {ValidationObserver, ValidationProvider} from "vee-validate";
 
     export default {
       name: 'Login',
+      components:{
+        ValidationObserver,
+        ValidationProvider,
+      },
       data() {
         return {
           samaccountname: '',
