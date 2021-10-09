@@ -19,7 +19,7 @@
                 <CInput
                   v-model="password"
                   prependHtml="<i class='cui-lock-locked'></i>"
-                  placeholder="Password"
+                  placeholder="Sua senha"
                   type="password"
                   autocomplete="curent-password"
                 >
