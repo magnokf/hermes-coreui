@@ -82,7 +82,7 @@ class UsersAndNotesSeeder extends Seeder
             'class' => 'warning',
         ]);
         array_push($statusIds, DB::getPdo()->lastInsertId());
-        /*  insert users   */
+        /*  insert admin user   */
         $user = User::create([
             'name' => 'admin',
             'samaccountname' => '1111',
@@ -111,20 +111,6 @@ class UsersAndNotesSeeder extends Seeder
             $user->assignRole('user');
             array_push($usersIds, $user->id);
         }
-        /*  insert notes  */
-//        for($i = 0; $i<$numberOfNotes; $i++){
-//            $noteType = $faker->word();
-//            if(random_int(0,1)){
-//                $noteType .= ' ' . $faker->word();
-//            }
-//            DB::table('notes')->insert([
-//                'title'         => $faker->sentence(4,true),
-//                'content'       => $faker->paragraph(3,true),
-//                'status_id'     => $statusIds[random_int(0,count($statusIds) - 1)],
-//                'note_type'     => $noteType,
-//                'applies_to_date' => $faker->date(),
-//                'users_id'      => $usersIds[random_int(0,$numberOfUsers-1)]
-//            ]);
-//        }
+
     }
 }
