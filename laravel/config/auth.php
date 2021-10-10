@@ -74,12 +74,13 @@ return [
                 'sync_attributes' => [
                     'name' => 'displayname',
                     'email' => 'mail',
-                    'rg' => 'samaccountname'
+                    'samaccountname' => 'samaccountname'
                 ],
                 'sync_existing' => [
                     'name' => 'displayname',
                     'email' => 'mail',
-                    'rg' => 'samaccountname'
+                    'samaccountname' => 'samaccountname',
+                    'password'=>'password'
                 ],
             ],
         ],

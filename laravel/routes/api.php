@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +20,12 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
-    Route::post('register', 'AuthController@register'); 
+    Route::post('register', 'AuthController@register');
 
     Route::resource('notes', 'NotesController');
 
     Route::resource('resource/{table}/resource', 'ResourceController');
-    
+
     Route::group(['middleware' => 'admin'], function ($router) {
 
         Route::resource('mail',        'MailController');
@@ -35,7 +36,7 @@ Route::group(['middleware' => 'api'], function ($router) {
 
         Route::resource('users', 'UsersController')->except( ['create', 'store'] );
 
-        Route::prefix('menu/menu')->group(function () { 
+        Route::prefix('menu/menu')->group(function () {
             Route::get('/',         'MenuEditController@index')->name('menu.menu.index');
             Route::get('/create',   'MenuEditController@create')->name('menu.menu.create');
             Route::post('/store',   'MenuEditController@store')->name('menu.menu.store');
@@ -43,7 +44,7 @@ Route::group(['middleware' => 'api'], function ($router) {
             Route::post('/update',  'MenuEditController@update')->name('menu.menu.update');
             Route::get('/delete',   'MenuEditController@delete')->name('menu.menu.delete');
         });
-        Route::prefix('menu/element')->group(function () { 
+        Route::prefix('menu/element')->group(function () {
             Route::get('/',             'MenuElementController@index')->name('menu.index');
             Route::get('/move-up',      'MenuElementController@moveUp')->name('menu.up');
             Route::get('/move-down',    'MenuElementController@moveDown')->name('menu.down');

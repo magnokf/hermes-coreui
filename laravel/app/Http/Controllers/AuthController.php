@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+use LdapRecord\Laravel\Auth\ListensForLdapBindFailure;
 
 class AuthController extends Controller
 {
+    use ListensForLdapBindFailure;
     /**
      * Create a new AuthController instance.
      *
@@ -52,7 +54,7 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $credentials = request(['samaccountname', 'password']);
+        $credentials = $this->credentials($request);
 
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Proibido'], 401);
@@ -70,7 +72,7 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['message' => 'Saiu com sucesso']);
     }
 
     /**
@@ -90,10 +92,10 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function respondWithToken($token, $rg)
+    protected function respondWithToken($token, $samaccountname)
     {
 
-        $user = User::select('menuroles as roles')->where('rg', '=', $rg)->first();
+        $user = User::select('menuroles as roles')->where('samaccountname', '=', $samaccountname)->first();
 
 
         return response()->json([
@@ -102,5 +104,17 @@ class AuthController extends Controller
             'expires_in' => auth()->factory()->getTTL() * 60,
             'roles' => $user->roles,
         ]);
+    }
+
+    protected function credentials(Request $request)
+    {
+        return [
+            'samaccountname' => $request->samaccountname,
+            'password' => $request->password,
+            'fallback' => [
+                'samaccountname' => $request->samaccountname,
+                'password' => $request->password,
+            ],
+        ];
     }
 }

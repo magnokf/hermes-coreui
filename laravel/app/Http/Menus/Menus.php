@@ -18,10 +18,11 @@ class Menus implements MenuInterface{
     private function getGuestMenu(){
         $this->mb->addLink('Dashboard', '/', 'cui-speedometer');
         $this->mb->addLink('Login', '/login', 'cui-account-logout');
-        $this->mb->addLink('Register', '/register', 'cui-account-logout');
-
     }
-
+    private function getUserMenu(){
+        $this->mb->addLink('Dashboard', '/', 'cui-speedometer');
+        $this->mb->addLink('Login', '/login', 'cui-account-logout');
+    }
     private function getAdminMenu(){
         $this->mb->addLink('Painel de Controle', '/', 'cui-speedometer');
         $this->mb->addTitle('Theme');
@@ -71,6 +72,9 @@ class Menus implements MenuInterface{
             $this->mb->addLink('Error 404',     '/404');
             $this->mb->addLink('Error 500',     '/500');
         $this->mb->endDropdown();
+    }
+    private function getDiretorMenu(){
+        $this->mb->addLink('Painel de Controle do Diretor', '/', 'cui-speedometer');
 
     }
 
@@ -78,9 +82,14 @@ class Menus implements MenuInterface{
         $roles = explode(',', $roles);
         if(empty($roles)){
             $this->getGuestMenu();
-        }elseif(in_array('user', $roles)){
+        }elseif(in_array('admin', $roles)){
             $this->getAdminMenu();
-        }else{
+        }elseif(in_array('user', $roles)){
+            $this->getUserMenu();
+        }elseif(in_array('diretor', $roles)){
+            $this->getDiretorMenu();
+        }
+        else{
             $this->getGuestMenu();
         }
         return $this->mb->getResult();
