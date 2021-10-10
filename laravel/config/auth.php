@@ -79,7 +79,8 @@ return [
                 'sync_existing' => [
                     'name' => 'displayname',
                     'email' => 'mail',
-                    'samaccountname' => 'samaccountname'
+                    'samaccountname' => 'samaccountname',
+                    'password'=>'password'
                 ],
             ],
         ],
