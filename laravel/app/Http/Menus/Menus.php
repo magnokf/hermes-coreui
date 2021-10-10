@@ -18,10 +18,7 @@ class Menus implements MenuInterface{
     private function getGuestMenu(){
         $this->mb->addLink('Dashboard', '/', 'cui-speedometer');
         $this->mb->addLink('Login', '/login', 'cui-account-logout');
-        $this->mb->addLink('Register', '/register', 'cui-account-logout');
-
     }
-
     private function getAdminMenu(){
         $this->mb->addLink('Painel de Controle', '/', 'cui-speedometer');
         $this->mb->addTitle('Theme');
