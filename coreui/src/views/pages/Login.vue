@@ -21,7 +21,7 @@
                     v-model="samaccountname"
                     prependHtml="<i class='cui-user'></i>"
                     placeholder="seu rg CBMERJ"
-                    autocomplete="username rg"
+                    autocomplete="username"
                     maxlength="6"
 
                 >
@@ -38,7 +38,10 @@
                 </CInput>
                 <CRow>
                   <CCol col="12">
-                    <CButton type="submit" color="primary" class="col px-4">Entrar</CButton>
+                    <CButton type="submit" color="primary" class=" col px-4">
+
+                      Entrar
+                    </CButton>
                   </CCol>
                 </CRow>
               </CForm>
@@ -75,6 +78,7 @@
 <script>
 
 import axios from "axios";
+
     export default {
       name: 'Login',
       components: {
@@ -86,7 +90,8 @@ import axios from "axios";
           password: '',
           showMessage: false,
           message: '',
-          status:''
+          status:'',
+          rg: ''
 
         }
       },
