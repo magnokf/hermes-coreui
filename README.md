@@ -5,7 +5,7 @@ Projeto Hermes (hermes-coreui)...
 
 ``` bash
 # clone the repo
-$ git clone https://github.com/coreui/coreui-free-vue-laravel-admin-template.git my-project
+$ git clone https://github.com/magnokf/hermes-coreui.git
 
 # go into app's directory
 $ cd my-project/laravel
