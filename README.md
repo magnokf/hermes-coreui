@@ -73,9 +73,9 @@ Vue.prototype.$apiAdress = 'http://127.0.0.1:8000'
 
 ### When you have project open in browser
 
-Click "Login" on sidebar menu and log in with credentials:
+Click "Login" on sidebar menu and log in with #admin# credentials:
 
-* E-mail: _admin@admin.com_
+* RG: 1111
 * Password: _password_
 
 This user has roles: _user_ and _admin_
